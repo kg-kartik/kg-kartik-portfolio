@@ -59,7 +59,7 @@ export default function ReactInternalsBlogClient() {
           </div>
 
           <p>
-            I've been re-reading <Link href="https://jser.dev/2023-07-11-overall-of-react-internals" className="underline text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors">JSER</Link> blogs to delve deeper into React's internals, so I decided to write a blog post about it with my own learnings. In this post, I'll walk through the entire rendering process, from the
+            I've been re-reading <Link href="https://jser.dev/2023-07-11-overall-of-react-internals" className="underline text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors">JSER</Link> blogs to delve deeper into React's internals, so I decided to write a blog post about it with my own learnings. In this post, I'll walk through the basics of entire rendering process, from the
             initial trigger to the final paint on screen.
           </p>
 
@@ -259,11 +259,6 @@ function renderRootConcurrent(root) {
           <p>
             In future posts, I'll dive even deeper into specific parts of this process, particularly focusing on the
             Scheduler and how React prioritizes updates in concurrent mode.
-          </p>
-
-          <p>
-            If you found this helpful, feel free to like and share! And let me know in the comments if there are
-            specific aspects of React's internals you'd like me to explore next.
           </p>
         </motion.article>
       </main>
