@@ -111,6 +111,13 @@ root.render(<App />);`}
             ]
           </p>
 
+          <div className="my-8 p-4 bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 rounded">
+            <p className="text-yellow-800 dark:text-yellow-300 font-medium">
+              💡 <strong>Pro Tip:</strong> Keep referring to the React internals flow diagram above as we go through each stage. 
+              It will help you visualize how all these pieces connect together!
+            </p>
+          </div>
+
           <h2 className="text-2xl font-bold mt-8 mb-4">1. The Trigger Stage</h2>
           <p>Every React update begins with a trigger. There are two primary ways an update gets triggered in React:</p>
 
