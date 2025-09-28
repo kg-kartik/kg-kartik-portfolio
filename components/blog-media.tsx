@@ -11,9 +11,10 @@ interface BlogImageProps {
   width?: number
   height?: number
   className?: string
+  zoomable?: boolean
 }
 
-export function BlogImage({ src, alt, caption, width = 800, height = 400, className = "" }: BlogImageProps) {
+export function BlogImage({ src, alt, caption, width = 800, height = 400, className = "", zoomable = true }: BlogImageProps) {
   const [isLoaded, setIsLoaded] = useState(false)
   const [isZoomed, setIsZoomed] = useState(false)
 
@@ -26,10 +27,10 @@ export function BlogImage({ src, alt, caption, width = 800, height = 400, classN
         className={`my-8 ${className}`}
       >
         <motion.div
-          className="relative overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 cursor-zoom-in group"
-          whileHover={{ scale: 1.02 }}
+          className={`relative overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 ${zoomable ? 'cursor-zoom-in group' : ''}`}
+          whileHover={zoomable ? { scale: 1.02 } : {}}
           transition={{ duration: 0.3 }}
-          onClick={() => setIsZoomed(true)}
+          onClick={zoomable ? () => setIsZoomed(true) : undefined}
         >
           <Image
             src={src || "/placeholder.svg"}
@@ -45,9 +46,11 @@ export function BlogImage({ src, alt, caption, width = 800, height = 400, classN
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
             </div>
           )}
-          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
-            <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          </div>
+          {zoomable && (
+            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
+              <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </div>
+          )}
         </motion.div>
         {caption && (
           <motion.figcaption
@@ -62,7 +65,7 @@ export function BlogImage({ src, alt, caption, width = 800, height = 400, classN
       </motion.figure>
 
       {/* Zoom Modal */}
-      {isZoomed && (
+      {zoomable && isZoomed && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

@@ -70,12 +70,34 @@ export default function ReactInternalsBlogClient() {
             </p>
           </div>
 
+          <h2 className="text-2xl font-bold mt-8 mb-4">🌱 What is a React Root?</h2>
+          <p>
+            Before we dive into the internals, let's understand what a <strong>React Root</strong> actually is. 
+            A root is the entry point of your React application. It's created using <code>ReactDOM.createRoot()</code> and 
+            represents the top-level container where your entire component tree will be rendered.
+          </p>
+
+          <CodeBlock language="javascript" title="Creating a React Root">
+            {`// This creates a React root
+const root = ReactDOM.createRoot(document.getElementById('app'));
+
+// This renders your component tree into that root
+root.render(<App />);`}
+          </CodeBlock>
+
+          <p>
+            Think of the root as the <em>foundation</em> of your React application. It's the bridge between your React 
+            components and the actual DOM. Every React application has exactly one root, and this root manages the 
+            entire lifecycle of your component tree.
+          </p>
+
           <BlogImage
-            src={`/images/react-internals-overview-${currentTheme}.png`}
+            src={ theme === 'dark' ? `/images/react-internals-overview-dark.png` : `/images/react-internals-overview-light.png`}
             alt="React internals stages"
             caption="React internals stages"
             width={1200}
             height={600}
+            zoomable={false}
           />
 
           <p className="text-sm text-gray-600 dark:text-gray-400 italic mb-6">
