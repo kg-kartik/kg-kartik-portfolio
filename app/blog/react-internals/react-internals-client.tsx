@@ -11,7 +11,7 @@ import { useTheme } from "next-themes"
 
 export default function ReactInternalsBlogClient() {
   const {theme} = useTheme();
-  const currentTheme = theme || 'dark'; // Fallback to 'light' if theme is undefined
+  const currentTheme = theme || 'dark';
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 dark:text-white transition-colors duration-300">
       <ScrollProgress />
