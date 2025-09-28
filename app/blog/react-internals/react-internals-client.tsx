@@ -11,7 +11,7 @@ import { useTheme } from "next-themes"
 
 export default function ReactInternalsBlogClient() {
   const {theme} = useTheme();
-  const currentTheme = theme || 'dark'; // Fallback to 'light' if theme is undefined
+  const currentTheme = theme || 'dark';
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 dark:text-white transition-colors duration-300">
       <ScrollProgress />
@@ -52,14 +52,14 @@ export default function ReactInternalsBlogClient() {
             🔄 Starting diving into React Internals
           </motion.h1>
           <div className="flex items-center justify-between mb-8">
-            <p className="text-gray-500 dark:text-gray-400">June 15, 2025 · 8 min read</p>
+            <p className="text-gray-500 dark:text-gray-400">September 28, 2025 · 8 min read</p>
             <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }}>
               <PersistentLikeButton slug="react-internals" />
             </motion.div>
           </div>
 
           <p>
-            I've been re-reading <Link href="https://jser.dev/2023-07-11-overall-of-react-internals" className="underline text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors">JSER</Link> blogs to delve deeper into React's internals, so I decided to write a blog post about it with my own learnings. In this post, I'll walk through the entire rendering process, from the
+            I've been re-reading <Link href="https://jser.dev/2023-07-11-overall-of-react-internals" className="underline text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors">JSER</Link> blogs to delve deeper into React's internals, so I decided to write a blog post about it with my own learnings. In this post, I'll walk through the basics of entire rendering process, from the
             initial trigger to the final paint on screen.
           </p>
 
@@ -70,12 +70,34 @@ export default function ReactInternalsBlogClient() {
             </p>
           </div>
 
+          <h2 className="text-2xl font-bold mt-8 mb-4">🌱 What is a React Root?</h2>
+          <p>
+            Before we dive into the internals, let's understand what a <strong>React Root</strong> actually is. 
+            A root is the entry point of your React application. It's created using <code>ReactDOM.createRoot()</code> and 
+            represents the top-level container where your entire component tree will be rendered.
+          </p>
+
+          <CodeBlock language="javascript" title="Creating a React Root">
+            {`// This creates a React root
+const root = ReactDOM.createRoot(document.getElementById('app'));
+
+// This renders your component tree into that root
+root.render(<App />);`}
+          </CodeBlock>
+
+          <p>
+            Think of the root as the <em>foundation</em> of your React application. It's the bridge between your React 
+            components and the actual DOM. Every React application has exactly one root, and this root manages the 
+            entire lifecycle of your component tree.
+          </p>
+
           <BlogImage
-            src={`/images/react-internals-overview-${currentTheme}.png`}
+            src={ theme === 'dark' ? `/images/react-internals-overview-dark.png` : `/images/react-internals-overview-light.png`}
             alt="React internals stages"
             caption="React internals stages"
             width={1200}
             height={600}
+            zoomable={false}
           />
 
           <p className="text-sm text-gray-600 dark:text-gray-400 italic mb-6">
@@ -259,11 +281,6 @@ function renderRootConcurrent(root) {
           <p>
             In future posts, I'll dive even deeper into specific parts of this process, particularly focusing on the
             Scheduler and how React prioritizes updates in concurrent mode.
-          </p>
-
-          <p>
-            If you found this helpful, feel free to like and share! And let me know in the comments if there are
-            specific aspects of React's internals you'd like me to explore next.
           </p>
         </motion.article>
       </main>

@@ -2,26 +2,26 @@ import type { Metadata } from "next"
 import ReactInternalsBlogClient from "./react-internals-client"
 
 export const metadata: Metadata = {
-  title: "Diving Deep Into React's Rendering Process | Kartik Goel",
+  title: "Understanding basics of React internals | Kartik Goel",
   description:
-    "Explore the internal workings of React's rendering process, from triggers and scheduling to rendering and committing changes to the DOM.",
+    "Understanding basics of how React schedules, renders, and commits updates to the DOM.",
   openGraph: {
-    title: "Diving Deep Into React's Rendering Process",
-    description: "Understanding how React schedules, renders, and commits updates to the DOM.",
+    title: "Understanding basics of React internals",
+    description: "Understanding basics of how React schedules, renders, and commits updates to the DOM.",
     images: [
       {
-        url: "https://i.postimg.cc/VsXX1Pqn/Chat-GPT-Image-May-30-2025-04-45-32-PM.png",
+        url: "https://i.postimg.cc/fRXsgmCQ/react-internals.png?v=2",
         width: 1200,
         height: 600,
-        alt: "React rendering process visualization",
+        alt: "React internals",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Diving Deep Into React's Rendering Process",
-    description: "Understanding how React schedules, renders, and commits updates to the DOM.",
-    images: ["https://i.postimg.cc/VsXX1Pqn/Chat-GPT-Image-May-30-2025-04-45-32-PM.png"],
+    title: "Understanding basics of React internals",
+    description: "Understanding basics of how React schedules, renders, and commits updates to the DOM.",
+    images: ["https://i.postimg.cc/fRXsgmCQ/react-internals.png?v=2"],
   },
 }
 
