@@ -8,12 +8,12 @@ import { motion } from "framer-motion"
 import { AnimatedSection, StaggeredChildren } from "@/components/animations"
 import { useInView } from "react-intersection-observer"
 import { ScrollProgress } from "@/components/scroll-progress"
-import { TravelMarquee } from "@/components/travel-marquee"
 
 export default function Home() {
   const [headerRef, headerInView] = useInView({ triggerOnce: true })
   const [introRef, introInView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
+  //dummy commit
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 dark:text-white transition-colors duration-300">
       <ScrollProgress />
