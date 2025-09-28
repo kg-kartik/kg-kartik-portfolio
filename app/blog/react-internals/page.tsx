@@ -6,11 +6,11 @@ export const metadata: Metadata = {
   description:
     "Understanding basics of how React schedules, renders, and commits updates to the DOM.",
   openGraph: {
-    title: "Understanding basics of React internals ",
+    title: "Understanding basics of React internals",
     description: "Understanding basics of how React schedules, renders, and commits updates to the DOM.",
     images: [
       {
-        url: "https://i.postimg.cc/fRXsgmCQ/react-internals.png",
+        url: "https://i.postimg.cc/fRXsgmCQ/react-internals.png?v=2",
         width: 1200,
         height: 600,
         alt: "React internals",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Understanding basics of React internals",
     description: "Understanding basics of how React schedules, renders, and commits updates to the DOM.",
-    images: ["https://i.postimg.cc/fRXsgmCQ/react-internals.png"],
+    images: ["https://i.postimg.cc/fRXsgmCQ/react-internals.png?v=2"],
   },
 }
 
