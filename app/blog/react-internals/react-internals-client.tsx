@@ -52,7 +52,7 @@ export default function ReactInternalsBlogClient() {
             🔄 Starting diving into React Internals
           </motion.h1>
           <div className="flex items-center justify-between mb-8">
-            <p className="text-gray-500 dark:text-gray-400">June 15, 2025 · 8 min read</p>
+            <p className="text-gray-500 dark:text-gray-400">September 28, 2025 · 8 min read</p>
             <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }}>
               <PersistentLikeButton slug="react-internals" />
             </motion.div>
