@@ -11,14 +11,14 @@ import { BlogImage, CodeBlock } from "@/components/blog-media"
 export default function AudioSeekingBlogClient() {
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black dark:text-white transition-colors duration-300 relative">
+    <div className="min-h-screen bg-white dark:bg-[#0d0d0d] dark:text-white transition-colors duration-300 relative">
       {/* Dot pattern background */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1a1a1a_1px,transparent_1px)] [background-size:20px_20px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/60 to-white/80 dark:from-black/80 dark:via-black/60 dark:to-black/80" />
+        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1f1f1f_1px,transparent_1px)] [background-size:20px_20px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/60 to-white/80 dark:from-[#0d0d0d]/80 dark:via-[#0d0d0d]/60 dark:to-[#0d0d0d]/80" />
       </div>
       <ScrollProgress />
-      <header className="border-b border-gray-100 dark:border-gray-800/50 bg-white/80 dark:bg-black/80 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b border-gray-100 dark:border-gray-800/50 bg-white/80 dark:bg-[#0d0d0d]/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <motion.h1
