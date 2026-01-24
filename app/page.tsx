@@ -1,13 +1,16 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowUpRight, Github, Globe, Music, Gamepad2, UtensilsCrossed, Music2, Disc3 } from "lucide-react"
+import { ArrowUpRight, Github, Globe, Music, Gamepad2, UtensilsCrossed, Music2, Disc3, FileText, ExternalLink, Plane } from "lucide-react"
 import { ConfettiButton } from "@/components/confetti-button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { motion } from "framer-motion"
 import { AnimatedSection, StaggeredChildren } from "@/components/animations"
 import { useInView } from "react-intersection-observer"
 import { ScrollProgress } from "@/components/scroll-progress"
+import { TravelMarquee } from "@/components/travel-marquee"
+import { TrophyConfetti } from "@/components/trophy-confetti"
+import { IconConfetti } from "@/components/icon-confetti"
 
 export default function Home() {
   const [headerRef, headerInView] = useInView({ triggerOnce: true })
@@ -15,9 +18,14 @@ export default function Home() {
 
   //dummy commit
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 dark:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-white dark:bg-black dark:text-white transition-colors duration-300 relative">
+      {/* Dot pattern background */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1a1a1a_1px,transparent_1px)] [background-size:20px_20px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/60 to-white/80 dark:from-black/80 dark:via-black/60 dark:to-black/80" />
+      </div>
       <ScrollProgress />
-      <header className="border-b border-gray-100 dark:border-gray-800">
+      <header className="border-b border-gray-100 dark:border-gray-800/50 bg-white/80 dark:bg-black/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <motion.h1
             ref={headerRef}
@@ -95,7 +103,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Link
-                    href="https://listen.rezonance.in/search/zehnaseeb"
+                    href="https://listen.rezonance.in/b03752a374d50bed1933db93024a7314"
                     className="underline text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors font-medium"
                   >
                     Zehnaseeb
@@ -108,7 +116,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Link
-                    href="https://listen.rezonance.in/album/eccbe04ab1f9d0de1fca3be3beb1382e"
+                    href="https://listen.rezonance.in/82e9e11b4a4c1d645da89cf8796b2b96"
                     className="underline text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors font-medium"
                   >
                     Heeriye
@@ -151,22 +159,37 @@ export default function Home() {
 
         {/* Travel Marquee Section */}
 
-        {/* <AnimatedSection className="mb-24" delay={0.05}>
-          <h2 className="text-2xl font-bold mb-8 border-b border-gray-100 dark:border-gray-800 pb-2">wanderlust</h2>
+        <AnimatedSection className="mb-24" delay={0.05}>
+          <h2 className="text-2xl font-bold mb-8 border-b border-gray-100 dark:border-gray-800 pb-2 flex items-center gap-2">
+            <motion.div
+              animate={{
+                y: [0, -5, 0],
+                rotate: [0, -10, 0, 10, 0],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Number.POSITIVE_INFINITY,
+                repeatType: "loop",
+              }}
+            >
+              <Plane className="w-5 h-5 text-blue-500" />
+            </motion.div>
+            wanderlust
+          </h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
             className="text-gray-600 dark:text-gray-400 mb-8"
           >
-            Capturing moments from around the world. Each journey tells a story, each destination leaves a mark.
+            Having been working remotely for a few years now, you would find me pushing code most of the time from a hilltop 🏔️ (mountain lover here) or from a beautiful cafe ☕ in an aesthetic city or sometimes maybe from a beach shack 🏖️.
           </motion.p>
           <TravelMarquee />
         </AnimatedSection>
-        */}
+       
 
         <AnimatedSection className="mb-24" delay={0.1}>
-          <h2 className="text-2xl font-bold mb-8 border-b border-gray-100 dark:border-gray-800 pb-2">work</h2>
+          <h2 className="text-2xl font-bold mb-8 border-b border-gray-100 dark:border-neutral-800 pb-2">work</h2>
 
           <StaggeredChildren staggerDelay={0.15} className="space-y-8">
             <div>
@@ -201,22 +224,40 @@ export default function Home() {
         </AnimatedSection>
 
         <AnimatedSection className="mb-24">
-          <h2 className="text-2xl font-bold mb-8 border-b border-gray-100 dark:border-gray-800 pb-2">achievements</h2>
+          <h2 className="text-2xl font-bold mb-8 border-b border-gray-100 dark:border-neutral-800 pb-2">achievements</h2>
 
           <StaggeredChildren staggerDelay={0.15} className="space-y-8">
             <ConfettiButton>
               <div className="group">
                 <div className="flex items-start gap-4">
-                  <div className="text-2xl text-amber-500 mt-1">🏆</div>
+                  <TrophyConfetti color="text-amber-500" />
                   <div>
                     <h3 className="text-lg font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2">
                       Runner up in Linode x Hashnode Hackathon
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
+                    <p className="text-gray-600 dark:text-gray-400 mb-3">
                       We designed and built a platform as a service (PaaS) tool that allow users to deploy their
                       applications to Linode in 3 easy steps, removing the hassle of manually setting up a Linux VM and
                       setting up a reverse-proxy server
                     </p>
+                    <div className="flex gap-4 text-xs">
+                      <Link
+                        href="https://townhall.hashnode.com/linode-x-hashnode-hackathon-winners#:~:text=Diode"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center text-gray-500 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> Winners
+                      </Link>
+                      <Link
+                        href="https://blog.radioactive11.com/diode"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center text-gray-500 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                      >
+                        <FileText className="w-3.5 h-3.5 mr-1.5" /> Blog
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -225,16 +266,26 @@ export default function Home() {
             <ConfettiButton>
               <div className="group">
                 <div className="flex items-start gap-4">
-                  <div className="text-2xl text-blue-500 mt-1">🏆</div>
+                  <TrophyConfetti color="text-blue-500" />
                   <div>
                     <h3 className="text-lg font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2">
                       Honourable Mention in Build the World with Dolby.io Hackathon
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
+                    <p className="text-gray-600 dark:text-gray-400 mb-3">
                       We built Obsidian, a platform for streamlining classroom experience using Dolby's communication
                       APIs by providing features ranging from plagiarism detection in handwritten assignments to
                       automatic class notes generation from recorded video conferences.
                     </p>
+                    <div className="flex gap-4 text-xs">
+                      <Link
+                        href="https://devpost.com/software/obsidian-2qje1y"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> Devpost
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -243,14 +294,24 @@ export default function Home() {
             <ConfettiButton>
               <div className="group">
                 <div className="flex items-start gap-4">
-                  <div className="text-2xl text-green-500 mt-1">🏆</div>
+                  <TrophyConfetti color="text-green-500" />
                   <div>
-                    <h3 className="text-lg font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    <h3 className="text-lg font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2">
                       Google Code in 2017 Finalist
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
+                    <p className="text-gray-600 dark:text-gray-400 mb-3">
                       Contributed in various open source tasks in Drupal organisation.
                     </p>
+                    <div className="flex gap-4 text-xs">
+                      <Link
+                        href="https://codein.withgoogle.com/archive/2017/#:~:text=Drupal"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center text-gray-500 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> Winners
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -259,7 +320,7 @@ export default function Home() {
             <ConfettiButton>
               <div className="group">
                 <div className="flex items-start gap-4">
-                  <div className="text-2xl text-purple-500 mt-1">🏆</div>
+                  <TrophyConfetti color="text-purple-500" />
                   <div>
                     <h3 className="text-lg font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2">
                       CERN Beamline for Schools Global Level Finalist
@@ -276,14 +337,16 @@ export default function Home() {
         </AnimatedSection>
 
         <AnimatedSection delay={0.2}>
-          <h2 className="text-2xl font-bold mb-8 border-b border-gray-100 dark:border-gray-800 pb-2">projects</h2>
+          <h2 className="text-2xl font-bold mb-8 border-b border-gray-100 dark:border-neutral-800 pb-2">projects</h2>
 
           <StaggeredChildren staggerDelay={0.15} className="space-y-8">
             <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }}>
               <div className="flex gap-4">
-                <div className="w-12 h-12 rounded-full bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center flex-shrink-0">
-                  <Music className="w-6 h-6 text-purple-500" />
-                </div>
+                <IconConfetti 
+                    icon={Music} 
+                    iconColor="text-purple-500" 
+                    bgColor="bg-purple-50 dark:bg-purple-900/20"
+                  />
                 <div className="flex-1">
                   <h3 className="text-lg font-medium mb-2 flex items-center gap-2">
                     <Link
@@ -317,9 +380,11 @@ export default function Home() {
 
               <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }}>
               <div className="flex gap-4">
-                <div className="w-12 h-12 rounded-full bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center flex-shrink-0">
-                  <Gamepad2 className="w-6 h-6 text-orange-500" />
-                </div>
+                <IconConfetti 
+                    icon={Gamepad2} 
+                    iconColor="text-orange-500" 
+                    bgColor="bg-orange-50 dark:bg-orange-900/20"
+                  />
                 <div className="flex-1">
                   <h3 className="text-lg font-medium mb-2 flex items-center gap-2">
                     <Link
@@ -357,9 +422,11 @@ export default function Home() {
 
             <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }}>
               <div className="flex gap-4">
-                <div className="w-12 h-12 rounded-full bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center flex-shrink-0">
-                  <Gamepad2 className="w-6 h-6 text-orange-500" />
-                </div>
+                <IconConfetti 
+                    icon={Gamepad2} 
+                    iconColor="text-orange-500" 
+                    bgColor="bg-orange-50 dark:bg-orange-900/20"
+                  />
                 <div className="flex-1">
                   <h3 className="text-lg font-medium mb-2 flex items-center gap-2">
                     <Link
@@ -394,9 +461,11 @@ export default function Home() {
 
             <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }}>
               <div className="flex gap-4">
-                <div className="w-12 h-12 rounded-full bg-green-50 dark:bg-green-900/20 flex items-center justify-center flex-shrink-0">
-                  <UtensilsCrossed className="w-6 h-6 text-green-500" />
-                </div>
+                <IconConfetti 
+                    icon={UtensilsCrossed} 
+                    iconColor="text-green-500" 
+                    bgColor="bg-green-50 dark:bg-green-900/20"
+                  />
                 <div className="flex-1">
                   <h3 className="text-lg font-medium mb-2 flex items-center gap-2">
                     <Link

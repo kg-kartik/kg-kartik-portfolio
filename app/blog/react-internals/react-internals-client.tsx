@@ -13,9 +13,14 @@ export default function ReactInternalsBlogClient() {
   const {theme} = useTheme();
   const currentTheme = theme || 'dark';
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 dark:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-white dark:bg-black dark:text-white transition-colors duration-300 relative">
+      {/* Dot pattern background */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1a1a1a_1px,transparent_1px)] [background-size:20px_20px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/60 to-white/80 dark:from-black/80 dark:via-black/60 dark:to-black/80" />
+      </div>
       <ScrollProgress />
-      <header className="border-b border-gray-100 dark:border-gray-800">
+      <header className="border-b border-gray-100 dark:border-gray-800/50 bg-white/80 dark:bg-black/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <motion.h1
