@@ -11,8 +11,29 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Kartik Goel - Portfolio",
-  description: "Full Stack Engineer",
+  title: "Kartik Goel",
+  description: "Full Stack Engineer working on enhancing frontend systems. 7x Hackathon Winner.",
+  keywords: ["Kartik Goel", "Full Stack Engineer", "React", "TypeScript", "Web Developer", "Software Engineer", "QuillBot"],
+  authors: [{ name: "Kartik Goel" }],
+  creator: "Kartik Goel",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://kartikgoel.com",
+    siteName: "Kartik Goel",
+    title: "Kartik Goel",
+    description: "Full Stack Engineer working on enhancing frontend systems. 7x Hackathon Winner.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Kartik Goel",
+    description: "Full Stack Engineer working on enhancing frontend systems. 7x Hackathon Winner.",
+    creator: "@kartikgoel",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default function RootLayout({
