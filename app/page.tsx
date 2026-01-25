@@ -18,14 +18,14 @@ export default function Home() {
 
   //dummy commit
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0d0d0d] dark:text-white transition-colors duration-300 relative">
+    <div className="min-h-screen bg-white dark:bg-[#0a0a0a] dark:text-white transition-colors duration-300 relative">
       {/* Dot pattern background */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1f1f1f_1px,transparent_1px)] [background-size:20px_20px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/60 to-white/80 dark:from-[#0d0d0d]/80 dark:via-[#0d0d0d]/60 dark:to-[#0d0d0d]/80" />
+        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1a1a1a_1px,transparent_1px)] [background-size:20px_20px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/60 to-white/80 dark:from-[#0a0a0a]/80 dark:via-[#0a0a0a]/60 dark:to-[#0a0a0a]/80" />
       </div>
       <ScrollProgress />
-      <header className="border-b border-gray-100 dark:border-gray-800/50 bg-white/80 dark:bg-[#0d0d0d]/80 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b border-gray-100 dark:border-gray-800/30 bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <motion.h1
             ref={headerRef}
@@ -160,7 +160,7 @@ export default function Home() {
         {/* Travel Marquee Section */}
 
         <AnimatedSection className="mb-24" delay={0.05}>
-          <h2 className="text-2xl font-bold mb-8 border-b border-gray-100 dark:border-gray-800 pb-2 flex items-center gap-2">
+          <h2 className="text-2xl font-bold mb-8 border-b border-gray-100 dark:border-gray-800/30 pb-2 flex items-center gap-2">
             <motion.div
               animate={{
                 y: [0, -5, 0],
@@ -189,7 +189,7 @@ export default function Home() {
        
 
         <AnimatedSection className="mb-24" delay={0.1}>
-          <h2 className="text-2xl font-bold mb-8 border-b border-gray-100 dark:border-neutral-800 pb-2">work</h2>
+          <h2 className="text-2xl font-bold mb-8 border-b border-gray-100 dark:border-gray-800/30 pb-2">work</h2>
 
           <StaggeredChildren staggerDelay={0.15} className="space-y-8">
             <div>
@@ -224,7 +224,7 @@ export default function Home() {
         </AnimatedSection>
 
         <AnimatedSection className="mb-24">
-          <h2 className="text-2xl font-bold mb-8 border-b border-gray-100 dark:border-neutral-800 pb-2">achievements</h2>
+          <h2 className="text-2xl font-bold mb-8 border-b border-gray-100 dark:border-gray-800/30 pb-2">achievements</h2>
 
           <StaggeredChildren staggerDelay={0.15} className="space-y-8">
             <ConfettiButton>
@@ -337,7 +337,7 @@ export default function Home() {
         </AnimatedSection>
 
         <AnimatedSection delay={0.2}>
-          <h2 className="text-2xl font-bold mb-8 border-b border-gray-100 dark:border-neutral-800 pb-2">projects</h2>
+          <h2 className="text-2xl font-bold mb-8 border-b border-gray-100 dark:border-gray-800/30 pb-2">projects</h2>
 
           <StaggeredChildren staggerDelay={0.15} className="space-y-8">
             <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }}>

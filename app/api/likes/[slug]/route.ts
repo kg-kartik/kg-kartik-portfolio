@@ -1,8 +1,20 @@
 import { type NextRequest, NextResponse } from "next/server"
+import { headers } from "next/headers"
 
-function getClientIP(request: NextRequest): string {
-  const forwarded = request.headers.get("x-forwarded-for")
-  const realIP = request.headers.get("x-real-ip")
+function getClientIP(): string {
+  const headersList = headers()
+  const forwarded = headersList.get("x-forwarded-for")
+  const realIP = headersList.get("x-real-ip")
+  const cfConnectingIP = headersList.get("cf-connecting-ip") // Cloudflare
+
+  // Debug: log available headers (remove in production)
+  if (process.env.NODE_ENV === "development") {
+    console.log("Available IP headers:", {
+      "x-forwarded-for": forwarded,
+      "x-real-ip": realIP,
+      "cf-connecting-ip": cfConnectingIP,
+    })
+  }
 
   if (forwarded) {
     return forwarded.split(",")[0].trim()
@@ -12,7 +24,11 @@ function getClientIP(request: NextRequest): string {
     return realIP
   }
 
-  return request.ip || "unknown"
+  if (cfConnectingIP) {
+    return cfConnectingIP
+  }
+
+  return "unknown"
 }
 
 export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
@@ -63,7 +79,7 @@ export async function POST(request: NextRequest, { params }: { params: { slug: s
       return NextResponse.json({ error: "Invalid action" }, { status: 400 })
     }
 
-    const clientIP = getClientIP(request)
+    const clientIP = getClientIP()
     const likeKey = `likes:${params.slug}`
     const userLikeKey = `user_like:${params.slug}:${clientIP}`
 
@@ -81,7 +97,7 @@ export async function POST(request: NextRequest, { params }: { params: { slug: s
         return 1
       })
 
-      await redis.set(userLikeKey, "1", { ex: 60 * 60 * 24 * 30 }).catch(() => {})
+      await redis.set(userLikeKey, "1", { ex: 60 * 60 * 24 * 180 }).catch(() => {})
 
       return NextResponse.json({ likes: newLikes, liked: true })
     } else if (action === "unlike") {

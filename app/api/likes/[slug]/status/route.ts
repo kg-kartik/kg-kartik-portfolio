@@ -1,8 +1,11 @@
 import { type NextRequest, NextResponse } from "next/server"
+import { headers } from "next/headers"
 
-function getClientIP(request: NextRequest): string {
-  const forwarded = request.headers.get("x-forwarded-for")
-  const realIP = request.headers.get("x-real-ip")
+function getClientIP(): string {
+  const headersList = headers()
+  const forwarded = headersList.get("x-forwarded-for")
+  const realIP = headersList.get("x-real-ip")
+  const cfConnectingIP = headersList.get("cf-connecting-ip") // Cloudflare
 
   if (forwarded) {
     return forwarded.split(",")[0].trim()
@@ -12,7 +15,11 @@ function getClientIP(request: NextRequest): string {
     return realIP
   }
 
-  return request.ip || "unknown"
+  if (cfConnectingIP) {
+    return cfConnectingIP
+  }
+
+  return "unknown"
 }
 
 export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
@@ -33,7 +40,7 @@ export async function GET(request: NextRequest, { params }: { params: { slug: st
       token: process.env.KV_REST_API_TOKEN,
     })
 
-    const clientIP = getClientIP(request)
+    const clientIP = getClientIP()
     const userLikeKey = `user_like:${params.slug}:${clientIP}`
     const likeKey = `likes:${params.slug}`
 
