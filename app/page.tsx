@@ -56,7 +56,7 @@ export default function Home() {
             >
               QuillBot
             </Link>{" "}
-            {"& Gym"}
+            {"& Gym (sometimes :P)"}
           </p>
 
           <p className="mb-6">
@@ -199,7 +199,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="text-lg font-medium">QuillBot</h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">FullStack Developer</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">SDE 2</p>
                 </div>
               </div>
 
