@@ -74,7 +74,7 @@ export default function AudioSeekingBlogClient() {
             PS: Will be explaining the same with the live example of a free audio streaming Platform built by me and my
             friends. -{" "}
             <Link
-              href="https://rezo.radioactive11.com/"
+              href="https://listen.rezonance.stream/"
               className="underline text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors font-medium"
             >
               Rezonance
