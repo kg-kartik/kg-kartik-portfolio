@@ -50,6 +50,31 @@ export default function BlogPage() {
 
         <StaggeredChildren staggerDelay={0.15} containerDelay={0.2} className="space-y-6">
           <article>
+            <Link href="/blog/fetch-api-misconceptions" className="block">
+              <motion.div
+                className="py-6 px-4 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg transition-colors -mx-4"
+                whileHover={{ y: -2 }}
+                transition={{ duration: 0.2 }}
+              >
+                <h3 className="text-2xl font-medium mb-3">await fetch() isn&apos;t waiting for what you think it is.</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  One of the most common misunderstandings about the Fetch API — fetch() doesn&apos;t return the response
+                  body directly. Learn what actually happens when you call fetch() and why you need two .then() calls.
+                </p>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-500 dark:text-gray-400">August 9, 2025</span>
+                  <div className="flex items-center gap-4">
+                    <PersistentLikeButton slug="fetch-api-misconceptions" />
+                    <span className="text-blue-500 flex items-center">
+                      Read more <ArrowUpRight className="ml-1 w-4 h-4" />
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            </Link>
+          </article>
+
+          <article>
             <Link href="/blog/react-internals" className="block">
               <motion.div
                 className="py-6 px-4 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg transition-colors -mx-4"
