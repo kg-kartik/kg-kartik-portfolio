@@ -16,7 +16,6 @@ export default function Home() {
   const [headerRef, headerInView] = useInView({ triggerOnce: true })
   const [introRef, introInView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
-  //dummy commit
   return (
     <div className="min-h-screen bg-white dark:bg-[#0a0a0a] dark:text-white transition-colors duration-300 relative">
       {/* Dot pattern background */}
@@ -343,6 +342,43 @@ export default function Home() {
             <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }}>
               <div className="flex gap-4">
                 <IconConfetti 
+                    icon={Disc3} 
+                    iconColor="text-rose-500" 
+                    bgColor="bg-rose-50 dark:bg-rose-900/20"
+                  />
+                <div className="flex-1">
+                  <h3 className="text-lg font-medium mb-2 flex items-center gap-2">
+                    <Link
+                      href="https://vinyl.show"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors"
+                    >
+                      Vinyl
+                    </Link>
+                    <ArrowUpRight className="w-4 h-4 text-rose-500" />
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-3">
+                    A solo and multiplayer music guessing game where players test their music knowledge in real time.
+                    Listen to song snippets, guess the track before time runs out, compete with friends, and even import playlists from your favorite music apps.
+                  </p>
+                  <div className="flex gap-4 text-xs">
+                    <Link
+                      href="https://vinyl.show"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-gray-500 dark:text-gray-400 hover:text-rose-600 dark:hover:text-rose-400 transition-colors"
+                    >
+                      <Globe className="w-3.5 h-3.5 mr-1.5" /> Website
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }}>
+              <div className="flex gap-4">
+                <IconConfetti 
                     icon={Music} 
                     iconColor="text-purple-500" 
                     bgColor="bg-purple-50 dark:bg-purple-900/20"
@@ -378,7 +414,7 @@ export default function Home() {
               </div>
             </motion.div>
 
-              <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }}>
+            <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }}>
               <div className="flex gap-4">
                 <IconConfetti 
                     icon={Gamepad2} 
