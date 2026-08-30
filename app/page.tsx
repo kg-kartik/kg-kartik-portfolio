@@ -192,32 +192,62 @@ export default function Home() {
 
           <StaggeredChildren staggerDelay={0.15} className="space-y-8">
             <div>
-              <div className="flex gap-4 mb-4">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full bg-green-50 dark:bg-green-900/20 flex items-center justify-center flex-shrink-0">
                   <div className="text-green-600 dark:text-green-400 font-bold text-lg">Q</div>
                 </div>
                 <div>
                   <h3 className="text-lg font-medium">QuillBot</h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">SDE 2</p>
                 </div>
               </div>
 
-              <ul className="space-y-3 ml-16">
-                <li className="flex items-start">
-                  <span className="mr-2 text-green-500">•</span>
-                  <span className="text-gray-600 dark:text-gray-300">
-                    Developed a text-to-speech service that adapts to the consuming microfrontend's preferences,
-                    dynamically routing requests to the appropriate speech synthesis backend.
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-green-500">•</span>
-                  <span className="text-gray-600 dark:text-gray-300">
-                    Built a scalable mobile-focused microfrontend library for our Hero tool, Paraphraser, by adapting
-                    desktop components and enhancing UI/UX for use across views like the app and Word extension.
-                  </span>
-                </li>
-              </ul>
+              <div className="space-y-6 ml-16">
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="font-medium text-sm text-gray-900 dark:text-gray-100">SDE 2</span>
+                    <span className="text-gray-400 dark:text-gray-500 text-xs">•</span>
+                    <span className="text-gray-500 dark:text-gray-400 text-sm">Browser Extensions</span>
+                  </div>
+                  <ul className="space-y-3">
+                    <li className="flex items-start">
+                      <span className="mr-2 text-green-500">•</span>
+                      <span className="text-gray-600 dark:text-gray-300">
+                        Worked on various performance improvements, with a major focus on reducing long-task durations along critical paths from ~500ms to ~50ms by optimizing execution rather than splitting tasks, reducing CPU spikes and UI lag.
+                      </span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="mr-2 text-green-500">•</span>
+                      <span className="text-gray-600 dark:text-gray-300">
+                        Developed a platform-agnostic language detection service to integrate with our grammar checker service, where consumers inject their available language detectors, and detection runs based on the user's language preferences built from multiple sources.
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="font-medium text-sm text-gray-900 dark:text-gray-100">SDE 1</span>
+                    <span className="text-gray-400 dark:text-gray-500 text-xs">•</span>
+                    <span className="text-gray-500 dark:text-gray-400 text-sm">Webapp Tools</span>
+                  </div>
+                  <ul className="space-y-3">
+                    <li className="flex items-start">
+                      <span className="mr-2 text-green-500">•</span>
+                      <span className="text-gray-600 dark:text-gray-300">
+                        Developed a text-to-speech service that adapts to the consuming microfrontend's preferences,
+                        dynamically routing requests to the appropriate speech synthesis backend.
+                      </span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="mr-2 text-green-500">•</span>
+                      <span className="text-gray-600 dark:text-gray-300">
+                        Built a scalable mobile-focused microfrontend library for our Hero tool, Paraphraser, by adapting
+                        desktop components and enhancing UI/UX for use across views like the app and Word extension.
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </StaggeredChildren>
         </AnimatedSection>
