@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowUpRight, Github, Globe, Music, Gamepad2, UtensilsCrossed, Music2, Disc3, FileText, ExternalLink, Plane } from "lucide-react"
+import { ArrowUpRight, Github, Globe, Music, Gamepad2, UtensilsCrossed, Music2, Disc3, FileText, ExternalLink, Plane, Atom } from "lucide-react"
 import { ConfettiButton } from "@/components/confetti-button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { motion } from "framer-motion"
@@ -438,6 +438,42 @@ export default function Home() {
                       className="flex items-center text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
                     >
                       <Globe className="w-3.5 h-3.5 mr-1.5" /> Website
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }}>
+              <div className="flex gap-4">
+                <IconConfetti 
+                    icon={Atom} 
+                    iconColor="text-cyan-500" 
+                    bgColor="bg-cyan-50 dark:bg-cyan-900/20"
+                  />
+                <div className="flex-1">
+                  <h3 className="text-lg font-medium mb-2 flex items-center gap-2">
+                    <Link
+                      href="https://github.com/kg-kartik/react-scratched"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+                    >
+                      react-scratched
+                    </Link>
+                    <ArrowUpRight className="w-4 h-4 text-cyan-500" />
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-3">
+                    A mini, basic React built from scratch in ~500 LOC to understand what actually happens under the hood. Covers JSX to Virtual DOM, DOM rendering, useState, and reconciliation diffing.
+                  </p>
+                  <div className="flex gap-4 text-xs">
+                    <Link
+                      href="https://github.com/kg-kartik/react-scratched"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-gray-500 dark:text-gray-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+                    >
+                      <Github className="w-3.5 h-3.5 mr-1.5" /> GitHub
                     </Link>
                   </div>
                 </div>
