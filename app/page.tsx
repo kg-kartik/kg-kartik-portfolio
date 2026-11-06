@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowUpRight, Github, Globe, Music, Gamepad2, UtensilsCrossed, Music2, Disc3, FileText, ExternalLink, Plane, Atom } from "lucide-react"
+import { ArrowUpRight, Github, Globe, Music, Gamepad2, UtensilsCrossed, Music2, Disc3, FileText, ExternalLink, Plane, Atom, Laptop } from "lucide-react"
 import { ConfettiButton } from "@/components/confetti-button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { motion } from "framer-motion"
@@ -369,6 +369,43 @@ export default function Home() {
           <h2 className="text-2xl font-bold mb-8 border-b border-gray-100 dark:border-gray-800/30 pb-2">projects</h2>
 
           <StaggeredChildren staggerDelay={0.15} className="space-y-8">
+            <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }}>
+              <div className="flex gap-4">
+                <IconConfetti 
+                    icon={Laptop} 
+                    iconColor="text-emerald-500" 
+                    bgColor="bg-emerald-50 dark:bg-emerald-900/20"
+                  />
+                <div className="flex-1">
+                  <h3 className="text-lg font-medium mb-2 flex items-center gap-2">
+                    <Link
+                      href="https://macnotch.app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                    >
+                      MacNotch
+                    </Link>
+                    <ArrowUpRight className="w-4 h-4 text-emerald-500" />
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-3">
+                    A native macOS app that turns the MacBook notch into a live dashboard for cricket scores and your Zerodha portfolio.
+                    Type widgets in plain words, like a gym tracker or weather, and get a heads-up with a one-click Join when your next meeting starts.
+                  </p>
+                  <div className="flex gap-4 text-xs">
+                    <Link
+                      href="https://macnotch.app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                    >
+                      <Globe className="w-3.5 h-3.5 mr-1.5" /> Website
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
             <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }}>
               <div className="flex gap-4">
                 <IconConfetti 
