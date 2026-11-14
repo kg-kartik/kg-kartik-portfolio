@@ -68,7 +68,7 @@ export default function Home() {
             </Link>{" "}
             intiially which scaled to 2k+ users using the app. Then, built{" "}
             <Link
-              href="https://listen.rezonance.stream"
+              href="https://listen.rezonance.in"
               className="underline text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors"
             >
               webapp
@@ -102,7 +102,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Link
-                    href="https://listen.rezonance.stream/album/55c532fce2059e26db411d02233eeac0"
+                    href="https://listen.rezonance.in/album/55c532fce2059e26db411d02233eeac0"
                     className="underline text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors font-medium"
                   >
                     Khat
@@ -115,7 +115,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Link
-                    href="https://listen.rezonance.stream/album/0f23f7dc62bd6ce31623691a4c85da08"
+                    href="https://listen.rezonance.in/album/0f23f7dc62bd6ce31623691a4c85da08"
                     className="underline text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors font-medium"
                   >
                     Dooron Dooron
@@ -453,7 +453,7 @@ export default function Home() {
                 <div className="flex-1">
                   <h3 className="text-lg font-medium mb-2 flex items-center gap-2">
                     <Link
-                      href="https://listen.rezonance.stream"
+                      href="https://listen.rezonance.in"
                       className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
                     >
                       Rezonance
@@ -471,7 +471,7 @@ export default function Home() {
                       <Github className="w-3.5 h-3.5 mr-1.5" /> GitHub
                     </Link>
                     <Link
-                      href="https://listen.rezonance.stream"
+                      href="https://listen.rezonance.in"
                       className="flex items-center text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
                     >
                       <Globe className="w-3.5 h-3.5 mr-1.5" /> Website
