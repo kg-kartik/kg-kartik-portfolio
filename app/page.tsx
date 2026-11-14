@@ -102,7 +102,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Link
-                    href="https://listen.rezonance.in/album/55c532fce2059e26db411d02233eeac0"
+                    href="https://listen.rezonance.in/track/1854466376"
                     className="underline text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors font-medium"
                   >
                     Khat
@@ -115,7 +115,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Link
-                    href="https://listen.rezonance.in/album/0f23f7dc62bd6ce31623691a4c85da08"
+                    href="https://listen.rezonance.in/track/1603393584"
                     className="underline text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors font-medium"
                   >
                     Dooron Dooron
