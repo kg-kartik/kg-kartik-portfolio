@@ -63,16 +63,15 @@ export default function AudioSeekingBlogClient() {
 
           <p>
             Have you ever listened to a song or podcast online, skipped to your favorite part, and it just worked
-            instantly? That magic moment — where you drag the audio bar and the playback is still handled quietly — is
-            thanks to something beautifully orchestrated system inside your browser — streams, buffers, byte ranges, and
-            a little-known hero called the media engine.
+            instantly? That moment, where you drag the audio bar and playback picks up almost immediately, is thanks to
+            a well-orchestrated system inside your browser: streams, buffers, byte ranges, and a little-known hero called
+            the media engine.
           </p>
 
-          <p>Let's break it down and dive deep into how how all this happens under the hood.</p>
+          <p>Let's break it down and dive into how all of this happens under the hood.</p>
 
           <p className="italic text-gray-600 dark:text-gray-400">
-            PS: Will be explaining the same with the live example of a free audio streaming Platform built by me and my
-            friends. -{" "}
+            PS: I'll explain it with a live example from a free audio streaming platform built by my friends and me:{" "}
             <Link
               href="https://listen.rezonance.in/"
               className="underline text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors font-medium"
@@ -83,13 +82,12 @@ export default function AudioSeekingBlogClient() {
 
           <h2 className="text-2xl font-bold mt-8 mb-4">🧠 First: What Is Audio Streaming?</h2>
           <p>
-            Imagine you're watching a YouTube video. You don't download the whole thing first — it starts playing right
-            away. That's streaming — the browser is getting chunks of the file bit by bit and playing them as they
-            arrive.
+            Imagine you're watching a YouTube video. You don't download the whole thing first. It starts playing right
+            away. That's streaming: the browser receives the file bit by bit and plays it as it arrives.
           </p>
-          <p>When you press "play", the browser starts downloading just the beginning of the audio.</p>
+          <p>When you press "play", the browser starts by fetching the beginning of the audio.</p>
 
-          <h2 className="text-2xl font-bold mt-8 mb-4">⏩ What Happens When You click on Play?</h2>
+          <h2 className="text-2xl font-bold mt-8 mb-4">⏩ What Happens When You Click Play?</h2>
           <p>
             When you click the play button, the browser's built-in media engine immediately issues a Range request for
             the audio URL:
@@ -101,13 +99,16 @@ Range: bytes=0-`}
           </CodeBlock>
 
           <p>
-            This header range =0 tells the server, "Start at byte 0 and send me as much as you can based on certain
-            threshold," which is the main essence of streaming too. The server then responds with a 206 Partial Content
-            status and a Content-Range header in the form:
+            <code>Range: bytes=0-</code> tells the server, "Start at byte 0 and send me everything from there." There is
+            no end value, so the browser is asking for the rest of the file. The server responds with a{" "}
+            <code>206 Partial Content</code> status and headers like these:
           </p>
 
           <CodeBlock language="http" title="Server Response">
-            {`Content-Range: bytes X–Y/Z
+            {`HTTP/1.1 206 Partial Content
+Accept-Ranges: bytes
+Content-Range: bytes X-Y/Z
+Content-Length: (Y - X + 1)
 Content-Type: audio/mp4`}
           </CodeBlock>
 
@@ -120,40 +121,63 @@ Content-Type: audio/mp4`}
           />
 
           <ul className="list-disc pl-6 my-4">
-            <li>X is the starting byte (0 for the very beginning).</li>
-            <li>
-              Y is the last byte the server will deliver in this chunk over the same open connection—once Y bytes have
-              been sent, the connection can continue streaming until it ends by itself(network issue or abort) or the
-              client pauses.
-            </li>
+            <li>X is the first byte of this response (0 for the very beginning).</li>
+            <li>Y is the last byte of this response.</li>
             <li>Z is the total size of the audio file in bytes.</li>
           </ul>
 
-          <p>Here Y can obviously be much less than Z depending upon the network bandwidth.</p>
-
-          <h2 className="text-2xl font-bold mt-8 mb-4">⏩ What Happens When You don't seek?</h2>
-
           <p>
-            You would be thinking, if you don't seek then obviously the audio will stream till the song/audio ends,
-            Absolutely right Pr0grammer, but we would be covering a bit of how it all happens under the hood.
+            Y is fixed in the response header before a single byte of audio arrives, so your bandwidth can't change it.
+            With <code>bytes=0-</code>, most servers send everything that's left, which is exactly what the screenshot
+            shows: <code>0-9776699/9776700</code>, the whole file in one response. Some servers or CDNs cap each chunk to
+            a smaller size, but that's their policy, not your network speed. Bandwidth only affects how fast those bytes
+            come in.
           </p>
 
           <p>
-            Since you're not seeking, the TCP connection that's streaming the audio stays open. The browser's powerful
-            media engine takes it from here:
+            The <code>Accept-Ranges: bytes</code> header is the server telling the browser, "you're allowed to ask me
+            for byte ranges." That's what makes seeking possible. Without range support, the server just replies{" "}
+            <code>200 OK</code> with the whole file, and seeking either breaks or only works within the part that has
+            already downloaded.
+          </p>
+
+          <p>
+            Fun fact: if you try this in Safari, its first request is often just a tiny probe for{" "}
+            <code>Range: bytes=0-1</code>, to check whether the server supports ranges and learn the file size, before
+            it asks for the real data.
+          </p>
+
+          <h2 className="text-2xl font-bold mt-8 mb-4">⏩ What Happens When You Don't Seek?</h2>
+
+          <p>
+            You might be thinking: if you don't seek, the audio obviously streams until the song ends. Absolutely right,
+            Pr0grammer, but let's look at how that happens under the hood.
+          </p>
+
+          <p>
+            Since you're not seeking, the TCP connection that's streaming the audio stays open. The browser's media
+            engine takes it from here:
           </p>
 
           <ul className="list-disc pl-6 my-4">
-            <li>It tracks how much data is already buffered and how far ahead it wants to stay.</li>
+            <li>It tracks how much data is already buffered and how far ahead of the playhead it wants to stay.</li>
             <li>
-              If the amount of downloaded-but-not-yet-played data falls below a threshold (the low-water mark), the
-              engine automatically fetches more data on the stream. [So that's the `buffer` for the "buffer" :P]
+              If the amount of downloaded-but-not-yet-played data falls below a threshold (the low-water mark), it pulls
+              more data from the stream. [So that's the `buffer` in "buffering" :P]
             </li>
           </ul>
 
           <p>
-            You'll notice in your Network tab that the data stream's Content-Length keeps growing as each byte of audio
-            arrives in real time which adds to the total buffer.
+            The more interesting part is what happens when the buffer is full. Usually the connection isn't closed. The
+            browser simply stops reading from the socket, and TCP flow control slows the server down until the browser
+            is ready for more. Browsers differ here, though: Chrome sometimes cancels the request instead and opens a
+            new Range request later when it needs more data.
+          </p>
+
+          <p>
+            In your Network tab, watch the transferred size of the audio request: it keeps growing as bytes arrive in
+            real time. (The <code>Content-Length</code> header doesn't change. It's fixed at Y − X + 1 from the start.
+            Only the amount actually transferred so far grows.)
           </p>
 
           <BlogImage
@@ -166,23 +190,46 @@ Content-Type: audio/mp4`}
 
           <BlogImage
             src="/images/seek-request.png"
-            alt="Buffer growing progressively to 5456 kB"
-            caption="Buffer growing progressively, byte - 5456 kB"
+            alt="Transferred size of the same request growing to 5,456 kB"
+            caption="Same request a little later - transferred size has grown to 5,456 kB"
             width={1200}
             height={600}
           />
 
-          <h2 className="text-2xl font-bold mt-8 mb-4">⏩ What Happens When You seek?</h2>
+          <h2 className="text-2xl font-bold mt-8 mb-4">⏩ What Happens When You Seek?</h2>
 
           <p>
-            We should know that after parsing just a few header bytes of the audio file, the media engine immediately
-            learns both the file's total duration and its total byte size through which it maps the time and byte and
-            thus knows the byte corresponding to the time stamp.
+            To jump to a timestamp, the media engine needs to turn time into a byte position. It gets the two pieces it
+            needs from different places:
           </p>
 
+          <ul className="list-disc pl-6 my-4">
+            <li>
+              <strong>Total size</strong> comes from the <code>/Z</code> in <code>Content-Range</code>.
+            </li>
+            <li>
+              <strong>Duration and the time-to-byte mapping</strong> come from the file's own metadata, and where that
+              lives depends on the format.
+            </li>
+          </ul>
+
+          <ul className="list-disc pl-6 my-4">
+            <li>
+              <strong>MP3:</strong> a Xing/VBRI header near the start of the file holds the duration and a rough
+              100-point table that maps time to bytes. For constant-bitrate files it's even simpler: byte offset ≈ time
+              × bitrate / 8.
+            </li>
+            <li>
+              <strong>MP4/M4A:</strong> the <code>moov</code> box holds sample tables that give an exact time-to-byte
+              mapping. If <code>moov</code> sits at the end of the file (i.e. the file isn't "faststart"), you'll see the
+              browser make an extra Range request near the end of the file before playback can even start.
+            </li>
+          </ul>
+
           <p>
-            So, the moment you seek, the engine calculates your new playhead position in bytes by using that same
-            time-to-byte mapping and snapping to the nearest sync point. It then issues a Range header for that offset:
+            The engine can't start at any random byte, though. Audio is stored in small frames of about 23–26 ms each
+            (1152 samples per frame for MP3, 1024 for AAC), and decoding has to begin at a frame boundary. So it snaps
+            the offset to the nearest frame, drops the old stream, and issues a new Range request from there:
           </p>
 
           <CodeBlock language="http" title="Seek Range Request">
@@ -192,24 +239,29 @@ Range: bytes=<newByteOffset>-`}
 
           <BlogImage
             src="/images/streaming-progress.png"
-            alt="Network tab showing new request after seeking - fresh 206 request with 5,456 kB"
+            alt="Network tab showing new request after seeking - fresh 206 request"
             caption="New request triggered by seeking - browser abandons previous stream and starts fresh from the seek position"
             width={1200}
             height={600}
           />
 
           <p>
-            Pretty cool, right? What feels like a simple "skip to the good part" moment is actually a smart system
-            working behind the scenes to make it smooth. Now you know what's really going on when you hit play or drag
-            that audio bar. The browser's doing a lot more than just playing sound — it's streaming magic!
+            The server replies with another <code>206</code> starting from that byte, the engine fills a fresh buffer,
+            and playback resumes. The bytes you skipped over are never downloaded at all.
           </p>
 
           <p>
-            In our next blog, we will dive into how the audio from server is streamed to the client side with the magic
-            of node pipeline.
+            Pretty cool, right? What feels like a simple "skip to the good part" moment is a smart system working
+            behind the scenes to make it smooth. Now you know what's really going on when you hit play or drag that
+            audio bar.
           </p>
 
-          <p>So, Stay tuned! And do like, share if you learned something new from this blog :D</p>
+          <p>
+            In the next blog, we'll dive into how the audio is streamed from the server to the client with the magic of
+            Node's pipeline.
+          </p>
+
+          <p>So stay tuned! And do like and share if you learned something new from this blog :D</p>
         </motion.article>
       </main>
     </div>
